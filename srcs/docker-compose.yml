@@ -1,22 +1,66 @@
-version: '3'
+# version: '3'
+
+# services:
+#   mysql:
+#     image: mariadb
+#     volumes:
+#       - /data/mysql:/var/lib/mariadb_mysql
+#     environment:
+#       MYSQL_ROOT_PASSWORD: mysql_root_pass
+#       MYSQL_DATABASE: db_name
+#       MYSQL_USER: asgaulti
+#       MYSQL_PASSWORD: asgaulti42
+#     restart: always
+#   wordpress:
+#     image: wordpress:php7.3-fpm-alpine
+#     volumes:
+#       - /data/html:/var/www/html
+#     depends_on:
+#       - mysql
+#     environment:
+#       WORDPRESS_DB_HOST: mysql
+#       MYSQL_ROOT_PASSWORD: mysql_root_pass
+#       WORDPRESS_DB_NAME: db_name
+#       WORDPRESS_DB_USER: asgaulti
+#       WORDPRESS_DB_PASSWORD: asgaulti42
+#       WORDPRESS_TABLE_PREFIX: wp_
+#     links:
+#       - mysql
+#     restart: always
+#   nginx:
+#     image: nginx:alpine
+#     volumes:
+#       - ./nginx:/requirements/nginx/conf 
+#       - ./data/html:/var/www/html
+#     ports:
+#       - 8080:80
+#     links:
+#       - wordpress
+
+version : '3'
 
 services:
   mysql:
-    image: mariadb
+    image: mysql
     volumes:
-      - /data/mysql:/var/lib/mariadb_mysql
+      - /requirements/mysql:/var/lib/mysql #met le path de la machine hote dans le path du container
+      #ainsi les db files seront stockes dans la machine hote
+    container_name: mysql
+    # ports:
+    # <host_port>:<container_port>
     environment:
       MYSQL_ROOT_PASSWORD: mysql_root_pass
       MYSQL_DATABASE: db_name
       MYSQL_USER: user_name
       MYSQL_PASSWORD: user_pass
     restart: always
+
   wordpress:
     image: wordpress:php7.3-fpm-alpine
     volumes:
-      - /data/html:/var/www/html
+      - /data/html:/var/www/html # permet a tous les fichiers WP d'etre stockes dans la machine hote
     depends_on:
-      - mysql
+      - mysql # le service WP depend de mysql
     environment:
       WORDPRESS_DB_HOST: mysql
       MYSQL_ROOT_PASSWORD: mysql_root_pass
@@ -25,64 +69,20 @@ services:
       WORDPRESS_DB_PASSWORD: user_pass
       WORDPRESS_TABLE_PREFIX: wp_
     links:
-      - mysql
+      - mysql # permet au service WP de cmmuniquer avec mysql service
     restart: always
+
   nginx:
     image: nginx:alpine
     volumes:
-      - ./nginx:/requirements/nginx/conf 
+      - ./nginx:/requierments/nginx/nginx.conf 
       - ./data/html:/var/www/html
+      #- nginx:/etc/nginx/conf.d
+      #- /data/html:/var/www/html
     ports:
       - 8080:80
     links:
-      - wordpress
-
-# version : '3'
-
-# services:
-#   mysql:
-#     image: mariadb_mysql
-#     volumes:
-#       - /requirements/mariadb_mysql:/var/lib/mysql #met le path de la machine hote dans le path du container
-#       #ainsi les db files seront stockes dans la machine hote
-#     container_name: mysql
-#     # ports:
-#     # <host_port>:<container_port>
-#     env_file:
-#       MYSQL_ROOT_PASSWORD: mysql_root_pass
-#       MYSQL_DATABASE: db_name
-#       MYSQL_USER: user_name
-#       MYSQL_PASSWORD: user_pass
-#     restart: always
-
-#   wordpress:
-#     image: wordpress:php7.3-fpm-alpine
-#     volumes:
-#       - /data/html:/var/www/html # permet a tous les fichiers WP d'etre stockes dans la machine hote
-#     depends_on:
-#       - mysql # le service WP depend de mysql
-#     environment:
-#       WORDPRESS_DB_HOST: mysql
-#       MYSQL_ROOT_PASSWORD: mysql_root_pass
-#       WORDPRESS_DB_NAME: db_name
-#       WORDPRESS_DB_USER: user_name
-#       WORDPRESS_DB_PASSWORD: user_pass
-#       WORDPRESS_TABLE_PREFIX: wp_
-#     links:
-#       - mysql # permet au service WP de cmmuniquer avec mysql service
-#     restart: always
-
-#   nginx:
-#     image: nginx:debian
-#     volumes:
-#       - ./nginx:/requierments/nginx/nginx.conf 
-#       - ./data/html:/var/www/html
-#       #- nginx:/etc/nginx/conf.d
-#       #- /data/html:/var/www/html
-#     ports:
-#       - 8080:80
-#     links:
-#       - wordpress #permet de communiquer avec le service mysql
+      - wordpress #permet de communiquer avec le service mysql
 
 
 # 3 services : nginx, WP + php-fpm, MariaDB

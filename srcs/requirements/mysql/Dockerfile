@@ -1,9 +1,9 @@
 
-# #installation mariadb-server (syst de gestion de base de donnees)
-# RUN apt-get -y install mariadb-server
+#installation mariadb-server (syst de gestion de base de donnees)
+RUN apt-get -y install mariadb-server
 
-# #installation php-mysql (realiser des applis php avec une base de donnees mysql)
-# RUN apt-get -y install php-mysql
+#installation php-mysql (realiser des applis php avec une base de donnees mysql)
+RUN apt-get -y install php-mysql
 
 # # dans le mariadb container /var/lib/mysql appartient au user msyql (uid 999),
 # # ce qui est different dans la machine hote ubuntu
