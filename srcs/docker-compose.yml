@@ -40,49 +40,48 @@
 version : '3'
 
 services:
-  mysql:
-    image: mysql
-    volumes:
-      - /requirements/mysql:/var/lib/mysql #met le path de la machine hote dans le path du container
-      #ainsi les db files seront stockes dans la machine hote
-    container_name: mysql
-    # ports:
-    # <host_port>:<container_port>
-    environment:
-      MYSQL_ROOT_PASSWORD: mysql_root_pass
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: user_name
-      MYSQL_PASSWORD: user_pass
-    restart: always
+  # mysql:
+  #   build:
+  #     - /requirements/mysql
+  #   container_name: mysql
+  #   # ports:
+  #   # <host_port>:<container_port>
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: mysql_root_pass
+  #     MYSQL_DATABASE: db_name
+  #     MYSQL_USER: user_name
+  #     MYSQL_PASSWORD: user_pass
+  #   restart: always
 
-  wordpress:
-    image: wordpress:php7.3-fpm
-    volumes:
-      - /data/html:/var/www/html # permet a tous les fichiers WP d'etre stockes dans la machine hote
-    depends_on:
-      - mysql # le service WP depend de mysql
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      MYSQL_ROOT_PASSWORD: mysql_root_pass
-      WORDPRESS_DB_NAME: db_name
-      WORDPRESS_DB_USER: user_name
-      WORDPRESS_DB_PASSWORD: user_pass
-      WORDPRESS_TABLE_PREFIX: wp_
-    links:
-      - mysql # permet au service WP de cmmuniquer avec mysql service
-    restart: always
+  # wordpress:
+    # build:
+    #   constext: ./requirements/wordpress
+  #   depends_on:
+  #     - mysql # le service WP depend de mysql
+  #   environment:
+  #     WORDPRESS_DB_HOST: mysql
+  #     MYSQL_ROOT_PASSWORD: mysql_root_pass
+  #     WORDPRESS_DB_NAME: db_name
+  #     WORDPRESS_DB_USER: user_name
+  #     WORDPRESS_DB_PASSWORD: user_pass
+  #     WORDPRESS_TABLE_PREFIX: wp_
+  #   links:
+  #     - mysql # permet au service WP de cmmuniquer avec mysql service
+  #   restart: always
 
   nginx:
-    image: nginx
-    volumes:
-      - ./nginx:/requirements/nginx/nginx.conf 
-      - ./data/html:/var/www/html
+    build:
+      context: ./requirements/nginx
+    # volumes:
+    #   - ./nginx:/requirements/nginx/nginx.conf 
+    #   - ./data/html:/var/www/html
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
     ports:
+      # - 80:80
       - 443:443
-    links:
-      - wordpress #permet de communiquer avec le service mysql
+    # links:
+    #   - wordpress #permet de communiquer avec le service mysql
 
 
 # 3 services : nginx, WP + php-fpm, MariaDB

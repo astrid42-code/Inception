@@ -13,7 +13,7 @@ COPY ./conf /etc/nginx/nginx.conf
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O mkcert 
 RUN chmod 755 mkcert && ./mkcert -install && ./mkcert -cert-file /etc/ssl/certs/localhost.pem -key-file /etc/ssl/certs/localhost-key.pem localhost sendmail
 
-EXPOSE 80
+# EXPOSE 80
 EXPOSE 443
 
 # COPY  /etc/nginx/sites-available/default /etc/nginx/sites-available/asgaulti.tld

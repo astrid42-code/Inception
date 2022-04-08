@@ -21,3 +21,5 @@ rm		:	stop
 			docker-compose -f srcs/docker-compose.yml rm
 
 .PHONY:	all build up stop rm
+
+# docker build --no-cache requirements/nginx/ -t toto
