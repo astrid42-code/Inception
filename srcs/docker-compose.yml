@@ -56,7 +56,7 @@ services:
     restart: always
 
   wordpress:
-    image: wordpress:php7.3-fpm-alpine
+    image: wordpress:php7.3-fpm
     volumes:
       - /data/html:/var/www/html # permet a tous les fichiers WP d'etre stockes dans la machine hote
     depends_on:
@@ -73,14 +73,14 @@ services:
     restart: always
 
   nginx:
-    image: nginx:alpine
+    image: nginx
     volumes:
-      - ./nginx:/requierments/nginx/nginx.conf 
+      - ./nginx:/requirements/nginx/nginx.conf 
       - ./data/html:/var/www/html
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
     ports:
-      - 8080:80
+      - 443:443
     links:
       - wordpress #permet de communiquer avec le service mysql
 
