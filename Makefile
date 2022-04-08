@@ -6,7 +6,8 @@ all		:	build up
 # --f > ne rend pas la main au user 
 # donner le path du fichier de construction (.yml)
 build	:	
-			docker-compose -f srcs/docker-compose.yml build
+			docker-compose -f srcs/docker-compose.yml build 
+#--no-cache
 
 # build et run les containers (cmd docker-compose up)
 up		:	

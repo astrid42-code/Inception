@@ -1,9 +1,21 @@
+FROM debian:buster
 
 #installation mariadb-server (syst de gestion de base de donnees)
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get -y install mariadb-server
+RUN apt-get -y install mariadb-client
 
 #installation php-mysql (realiser des applis php avec une base de donnees mysql)
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get -y install php-mysql
+
+COPY ./conf /var/lib/mysql/mysql.conf
+
+EXPOSE 3306
+
+
 
 # # dans le mariadb container /var/lib/mysql appartient au user msyql (uid 999),
 # # ce qui est different dans la machine hote ubuntu
