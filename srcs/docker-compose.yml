@@ -46,10 +46,10 @@ services:
     # ports:
     # <host_port>:<container_port>
     environment:
-      MYSQL_ROOT_PASSWORD: mysql_root_pass
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: user_name
-      MYSQL_PASSWORD: user_pass
+      # MYSQL_ROOT_PASSWORD: mysql_root_pass
+      # MYSQL_DATABASE: db_name
+      # MYSQL_USER: user_name
+      # MYSQL_PASSWORD: user_pass
     # restart: always
 
   # wordpress:
@@ -77,7 +77,6 @@ services:
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
     ports:
-      # - 80:80
       - 443:443
     # links:
     #   - wordpress #permet de communiquer avec le service mysql

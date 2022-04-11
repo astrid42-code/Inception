@@ -2,6 +2,8 @@
 
 all		:	build up
 
+sudo sed -i "s/localhost/asgaulti.42.fr/g" /etc/hosts
+
 # build containers a partir du .yml
 # --f > ne rend pas la main au user 
 # donner le path du fichier de construction (.yml)
