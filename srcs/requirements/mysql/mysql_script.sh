@@ -1,4 +1,4 @@
-mysqld&
+mysqld& # lance en arriere plan
 until mysqladmin ping; do
     sleep 2
     echo "(fail to ping)"
@@ -21,5 +21,5 @@ mariadb -e "CREATE USER '$MYSQL_USER'@'mariadb'"
 mariadb -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE . * TO '$MYSQL_USER'@'mariadb'"
 mariadb -e "FLUSH PRIVILEGES"
 
-killall mysqld
-mysqld
+killall mysqld # kill l'arriere plan
+mysqld #relance en premer plan pour que ca ferme pas mon container

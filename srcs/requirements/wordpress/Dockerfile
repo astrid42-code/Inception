@@ -1,8 +1,15 @@
+FROM debian:buster
+
 # installation php
+RUN	apt-get update -y 
+RUN	apt-get upgrade -y 
 RUN apt-get -y install php7.3 php7.3-fpm php7.3-common php7.3-mysql php7.3-curl php7.3-intl php7.3-mbstring php7.3-cli php7.3-soap php7.3-imap
 
-# sudo userdel www-data
-# sudo useradd -u 82 www-data
+COPY wp-config.php /var/www/html/wordpress/.
 
-# sudo mkdir -p /data/html
-# sudo chown -R www-data:www-data /data/html
+COPY ./wp_script.sh  /etc/
+
+# sh ./auto_index.sh
+
+EXPOSE	9000
+CMD [ "bash", "/etc/wp_script.sh" ]
