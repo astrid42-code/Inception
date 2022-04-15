@@ -1,15 +1,43 @@
-FROM debian:buster
+# FROM debian:buster
 
-# installation php
-RUN	apt-get update -y 
-RUN	apt-get upgrade -y 
-RUN apt-get -y install php7.3 php7.3-fpm php7.3-common php7.3-mysql php7.3-curl php7.3-intl php7.3-mbstring php7.3-cli php7.3-soap php7.3-imap
+# # installation php
+# RUN	apt-get update -y 
+# RUN	apt-get upgrade -y 
+# RUN apt-get -y install php7.3 php7.3-fpm php7.3-common php7.3-mysql php7.3-curl php7.3-intl php7.3-mbstring php7.3-cli php7.3-soap php7.3-imap && \
+#     mkdir -p /run/php
 
-COPY wp-config.php /var/www/html/wordpress/.
+# RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+#     && chmod +x wp-cli.phar
+#     && mv wp-cli.phar /usr/local/bin/wp
 
-COPY ./wp_script.sh  /etc/
+# RUN mkdir /var/www/html && chmod 700 /var/www/html
 
-# sh ./auto_index.sh
+# COPY wp-config.php /var/www/html/wordpress/.
 
-EXPOSE	9000
-CMD [ "bash", "/etc/wp_script.sh" ]
+# COPY ./wp_script.sh  /etc/
+
+# # sh ./auto_index.sh
+
+# EXPOSE	9000
+# CMD [ "bash", "/etc/wp_script.sh" ]
+
+FROM    debian:buster 
+
+EXPOSE  9000
+
+RUN     apt-get update && \
+        mkdir -p /var/www/html && \
+        apt-get -y install php7.3-fpm php7.3-common php7.3-mysql curl mariadb-client && \
+        mkdir -p /run/php/
+
+RUN     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+        chmod +x wp-cli.phar && \
+        mv wp-cli.phar /usr/local/bin/wp
+
+COPY    ./www.conf /etc/php/7.3/fpm/pool.d/www.conf
+
+COPY    ./wp-config.php /etc/
+
+COPY    ./wp_script.sh /etc/
+
+CMD     ["sh", "/etc/wp_script.sh"]

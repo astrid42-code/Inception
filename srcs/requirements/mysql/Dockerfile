@@ -8,11 +8,6 @@ RUN apt-get upgrade -y
 RUN apt-get -y install mariadb-server
 RUN apt-get -y install mariadb-client
 RUN apt-get -y install php-mysql
-# RUN apt-get -y install php7.3 php7.3-fpm php7.3-common php7.3-mysql php7.3-curl php7.3-intl php7.3-mbstring php7.3-cli php7.3-soap php7.3-imap
-
-#installation php-mysql (realiser des applis php avec une base de donnees mysql)
-# RUN apt-get update -y
-# RUN apt-get upgrade -y
 
 COPY ./mysql.conf /var/lib/mysql/mysql.conf
 
@@ -24,7 +19,7 @@ COPY ./mysql_script.sh /var/run/mysqld
 RUN     chown -R mysql /var/run/mysqld
 
 # CMD     ["bash", "/var/script.sh"]
-CMD     ["bash", "/var/run/mysqld/mysql_script.sh"]
+CMD     ["sh", "/var/run/mysqld/mysql_script.sh"]
 
 
 # docker exec -it nom container sh > pour lancer bash et etre en mode interactif

@@ -1,0 +1,3 @@
+refaire script mariadb
+remettre les fastcgi dans nginx > ok
+modifier dans le wp-script.sh les noms utilisateurs > ok
