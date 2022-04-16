@@ -1,3 +1,5 @@
-refaire script mariadb
+refaire script mariadb > pb our creer l'user :
+mysql_1      | ERROR 1396 (HY000) at line 1: Operation CREATE USER failed for 'root'@'%'
+mysql_1      | ERROR 1396 (HY000) at line 1: Operation CREATE USER failed for 'user'@'mariadb'
 remettre les fastcgi dans nginx > ok
 modifier dans le wp-script.sh les noms utilisateurs > ok
