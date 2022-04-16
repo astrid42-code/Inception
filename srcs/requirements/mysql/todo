@@ -3,3 +3,9 @@ mysql_1      | ERROR 1396 (HY000) at line 1: Operation CREATE USER failed for 'r
 mysql_1      | ERROR 1396 (HY000) at line 1: Operation CREATE USER failed for 'user'@'mariadb'
 remettre les fastcgi dans nginx > ok
 modifier dans le wp-script.sh les noms utilisateurs > ok
+fichier .env a utiliser (voir dans sujet ce qui doit etre dedans obligatoirement)
+network et volumes a ajouter (qu'est ce que c'est et a quoi ca sert?)
+
+
+verifier les trucs interdits et obligatoires dans le sujet
+faire les tests avec la grille de correction
