@@ -47,16 +47,25 @@ services:
     # <host_port>:<container_port>
     # environment:
       # MYSQL_ROOT_PASSWORD: mysql_root_pass
+    networks:
+      - inception_network
       # MYSQL_DATABASE: db_name
       # MYSQL_USER: user_name
+    ports:
+      - "3306:3306"
       # MYSQL_PASSWORD: user_pass
-    # restart: always
+    restart: always
 
   wordpress:
     build:
       context: ./requirements/wordpress
     depends_on:
       - mysql # le service WP depend de mysql
+    networks:
+      - inception_network
+    working_dir: /var/www/html
+    ports:
+      - "9000:9000"
     # environment:
     #   WORDPRESS_DB_HOST: mysql
     #   MYSQL_ROOT_PASSWORD: lol
@@ -66,21 +75,29 @@ services:
     #   WORDPRESS_TABLE_PREFIX: wp_
     # links:
       # - mysql # permet au service WP de cmmuniquer avec mysql service
-    # restart: always
+    restart: always
 
   nginx:
     build:
       context: ./requirements/nginx
+    depends_on:
+      - wordpress
     # volumes:
     #   - ./nginx:/requirements/nginx/nginx.conf 
     #   - ./data/html:/var/www/html
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
+    networks:
+      - inception_network
     ports:
-      - 443:443
+      - "443:443"
     # links:
+    restart: always
     #   - wordpress #permet de communiquer avec le service mysql
 
+networks:
+  inception_network:
+    driver: bridge
 
 # 3 services : nginx, WP + php-fpm, MariaDB
 # un volume contenant bdd de WP
