@@ -1,7 +1,7 @@
 MYSQL_ROOT_USER=root
 MYSQL_PASSWORD=123soleil
 MYSQL_ROOT_PASSWORD=lol
-MYSQL_USER=asgaulti
+MYSQL_USER=user
 MYSQL_DATABASE=wpwordpress
 
 # creer un fichier et y mettre les infos

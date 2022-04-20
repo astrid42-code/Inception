@@ -40,11 +40,11 @@ http {
 		server_name			asgaulti.42.fr;
 		server_tokens off;
 
-	    location / {
-     		 # First attempt to serve request as file, then
-     		 # as directory, then fall back to displaying a 404.
-     		 try_files $uri $uri/ /index.php?$args;
-    		}
+	    # location / {
+     	# 	 # First attempt to serve request as file, then
+     	# 	 # as directory, then fall back to displaying a 404.
+     	# 	 try_files $uri $uri/ /index.php?$args;
+    	# 	}
 		
 		location ~ \.php$ {
 			try_files $uri =404;

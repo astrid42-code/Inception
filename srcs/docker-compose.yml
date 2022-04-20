@@ -43,6 +43,7 @@ services:
   mysql:
     build:
       context: ./requirements/mysql
+    container_name: "mysql"
     # ports:
     # <host_port>:<container_port>
     # environment:
@@ -61,6 +62,8 @@ services:
       context: ./requirements/wordpress
     depends_on:
       - mysql # le service WP depend de mysql
+    volumes:
+      - ./data/html:/var/www/html
     networks:
       - inception_network
     working_dir: /var/www/html
@@ -82,9 +85,9 @@ services:
       context: ./requirements/nginx
     depends_on:
       - wordpress
-    # volumes:
+    volumes:
     #   - ./nginx:/requirements/nginx/nginx.conf 
-    #   - ./data/html:/var/www/html
+      - ./data/html:/var/www/html
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
     networks:
