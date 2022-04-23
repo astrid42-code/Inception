@@ -63,7 +63,7 @@ services:
     depends_on:
       - mysql # le service WP depend de mysql
     volumes:
-      - ./data/html:/var/www/html
+      - wp-data:/var/www/html
     networks:
       - inception_network
     working_dir: /var/www/html
@@ -87,7 +87,7 @@ services:
       - wordpress
     volumes:
     #   - ./nginx:/requirements/nginx/nginx.conf 
-      - ./data/html:/var/www/html
+      - wp-data:/var/www/html
       #- nginx:/etc/nginx/conf.d
       #- /data/html:/var/www/html
     networks:
@@ -97,6 +97,9 @@ services:
     # links:
     restart: always
     #   - wordpress #permet de communiquer avec le service mysql
+
+volumes:
+  wp-data:
 
 networks:
   inception_network:
