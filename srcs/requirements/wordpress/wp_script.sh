@@ -6,7 +6,7 @@ wp core download --allow-root
 # echo "DEBUG OF FILE"
 # cat /etc/wp-config.php
 rm /var/www/html/wp-config-sample.php 
-# cp /etc/wp-config.php /var/www/html
+cp /etc/wp-config.php /var/www/html
 
 # echo "DEBUG OF FILE"
 
@@ -30,7 +30,7 @@ MYSQL_DATABASE=wpwordpress
 
 
 wp config create --dbname="$MYSQL_DATABASE" --dbuser="$MYSQL_USER" --dbpass="$MYSQL_PASSWORD" --dbhost=mysql --dbcharset="utf8" --dbcollate="utf8_general_ci" --allow-root # Configure la DB
-wp core install --url="asgaulti.42.fr" --title="Pingu's world" --admin_user="${MYSQL_ROOT_USER}"\
+wp core install --url="127.0.0.1" --title="Pingu's world" --admin_user="${MYSQL_ROOT_USER}"\
 	--admin_password="${MYSQL_ROOT_PASSWORD}" --admin_email="asgaulti@student.42.fr" --skip-email --allow-root #Configure le site et l'admin
 wp user create user test@example.com --role=author --allow-root
 # wp theme install <theme_name> --activate --allow-root
