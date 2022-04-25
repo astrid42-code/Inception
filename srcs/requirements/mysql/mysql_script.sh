@@ -1,8 +1,8 @@
-MYSQL_ROOT_USER=root
-MYSQL_PASSWORD=123soleil
-MYSQL_ROOT_PASSWORD=lol
-MYSQL_USER=user
-MYSQL_DATABASE=wpwordpress
+# MYSQL_ROOT_USER=root
+# MYSQL_PASSWORD=123soleil
+# MYSQL_ROOT_PASSWORD=lol
+# MYSQL_USER=user
+# MYSQL_DATABASE=wpwordpress
 
 # creer un fichier et y mettre les infos
 touch file 
@@ -19,8 +19,6 @@ GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' identified by '$MYSQL_PA
 FLUSH PRIVILEGES ;
 stop_file
 
-echo "Test to see if my file is correctly created"
-# cat file
 mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < file
 exec mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@
 

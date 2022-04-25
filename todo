@@ -1,0 +1,16 @@
+fichier .env a utiliser (voir dans sujet ce qui doit etre dedans obligatoirement) > ok
+network et volumes a ajouter (qu'est ce que c'est et a quoi ca sert?)
+
+
+verifier les trucs interdits et obligatoires dans le sujet
+> host ou --link ou links interdits
+
+faire les tests avec la grille de correction
+
+
+
+mettre en dur le mdp user > dans wp user create (wp-script.sh)
+
+faire volume (retirer volume nginx, faire volume mysql)
+
+couper redirection port 80
