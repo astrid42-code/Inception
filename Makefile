@@ -1,6 +1,6 @@
 #Regles pour build/run/stop/rm/clean les containers
 
-all :	build up
+all : up
 
 # sudo sed -i "s/localhost/asgaulti.42.fr/g" /etc/hosts
 
@@ -24,5 +24,3 @@ rm :	stop
 			docker-compose -f srcs/docker-compose.yml rm
 
 .PHONY:	all build up stop rm
-
-# docker build --no-cache requirements/nginx/ -t toto
