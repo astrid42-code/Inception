@@ -1,10 +1,7 @@
-all : up
-
-# sudo sed -i "s/localhost/asgaulti.42.fr/g" /etc/hosts
-
-# build et run les containers (cmd docker-compose up)
-up :	
-			docker-compose -f srcs/docker-compose.yml up
+all :	
+		mkdir -p /home/asgaulti/data/mysql-data
+		mkdir -p /home/asgaulti/data/wordpress-data
+		docker-compose -f srcs/docker-compose.yml up --build
 
 # stop : stop running containers without removing them
 stop :	
@@ -12,7 +9,9 @@ stop :
 
 #  rm : stop et efface les containers
 rm :	stop
+		rm -rf /home/asgaulti/data
 		docker system prune -a
-		docker volume prune
+		docker volume rm srcs_mysql-data
+		docker volume rm srcs_wordpress-data
 
 .PHONY:	all build up stop rm

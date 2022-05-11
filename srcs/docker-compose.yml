@@ -21,7 +21,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - wp-data:/var/www/html
+      - wordpress-data:/var/www/html
     networks:
       - inception_network
     working_dir: /var/www/html
@@ -37,17 +37,28 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wp-data:/var/www/html # volume contenant fichiers wp
+      - wordpress-data:/var/www/html
     networks:
       - inception_network
     ports:
       - "443:443"
     restart: always
 
-volumes:
-  wp-data:
-  mysql-data:
-
 networks:
   inception_network:
     driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/asgaulti/data/mysql-data
+      o: bind
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/asgaulti/data/wordpress-data
+      o: bind
+
